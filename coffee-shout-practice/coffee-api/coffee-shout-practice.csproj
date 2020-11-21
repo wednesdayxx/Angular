@@ -5,5 +5,9 @@
     <RootNamespace>coffee_shout_practice</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
 
 </Project>
