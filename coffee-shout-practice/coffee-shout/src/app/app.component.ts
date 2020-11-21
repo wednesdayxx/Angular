@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+
+const apiUrl = 'http://localhost:5000';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,40 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'coffee-shout';
+  username = '';
+  password = '';
+  token = null;
+
+  constructor(private http: HttpClient){ }
+
+  login() {
+    if (this.username === '') {
+      return;
+    }
+
+    if (this.password === '') {
+      return;
+    }
+
+    this.http.post<{token: string}>(apiUrl + '/login', {username: this.username, password: this.password})
+      .subscribe((body)=> {
+        this.token = body.token;
+      })
+  }
+
+  register() {
+    if (this.username === '') {
+      return;
+    }
+
+    if (this.password === '') {
+      return;
+    }
+
+    this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password})
+      .subscribe((body)=> {
+        this.token = body.token;
+      })
+  }
 }
+
