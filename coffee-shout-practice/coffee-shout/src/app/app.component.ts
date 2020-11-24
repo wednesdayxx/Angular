@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 
 const apiUrl = 'http://localhost:5000';
 
@@ -40,10 +39,8 @@ export class AppComponent {
       return;
     }
 
-    this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password})
-      .subscribe((body)=> {
-        this.token = body.token;
-      })
+    this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password});
+
   }
 }
 

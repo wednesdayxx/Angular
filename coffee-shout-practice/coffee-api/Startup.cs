@@ -46,6 +46,15 @@ namespace coffee_shout_practice
             {
                 endpoints.MapControllers();
             });
+
+            /*app.UseCors(builder => 
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });*/
+            //app.UseCors((options) => options.AllowAnyOrigin().AllowAnyMethod());
+            
         }
     }
 }

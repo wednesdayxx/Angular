@@ -70,7 +70,7 @@ namespace coffee_shout_practice.Controllers
         [HttpPost("register")]
         public ActionResult Register([FromBody]LoginDetails loginDetails)
         {
-           using(var connection = new SqlConnection(connectionString))
+            using(var connection = new SqlConnection(connectionString))
             {
                 var command = new SqlCommand($"insert into [user] (username, [password]) values({loginDetails.username}, {loginDetails.password})", connection);
                 connection.Open();
@@ -79,6 +79,6 @@ namespace coffee_shout_practice.Controllers
 
                 return Ok();
             } 
-        }
+        }        
     }
 }
