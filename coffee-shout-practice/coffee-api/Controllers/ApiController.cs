@@ -22,6 +22,13 @@ namespace coffee_shout_practice.Controllers
             public string token { get; set; }
         }
 
+        public struct SavedDetails
+        {
+            public string date { get; set; }
+            public int time { get; set; } 
+            public string venue { get; set; } 
+        }
+
         private static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Database=coffeeShout";
 
         private List<string> sessionTokens = new List<string>();
@@ -79,6 +86,20 @@ namespace coffee_shout_practice.Controllers
 
                 return Ok();
             } 
-        }        
+        }   
+
+        [HttpPost("save")]
+        public ActionResult Save([FromBody]SavedDetails savedDetails)
+        {
+            using(var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand($"insert into [coffeeDate] ([date], [time], venue) values({savedDetails.date}, {savedDetails.time}, {savedDetails.venue})", connection);
+                connection.Open();
+
+                command.ExecuteNonQuery();
+
+                return Ok();
+            }
+        }  
     }
 }

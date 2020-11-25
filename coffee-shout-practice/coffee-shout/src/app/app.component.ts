@@ -12,9 +12,13 @@ export class AppComponent {
   username = '';
   password = '';
   token = null;
+  date = '';
+  time = '';
+  venue = '';
+  isShown: boolean = false;
 
   constructor(private http: HttpClient){ }
-
+  
   login() {
     if (this.username === '') {
       return;
@@ -28,6 +32,10 @@ export class AppComponent {
       .subscribe((body)=> {
         this.token = body.token;
       })
+
+    this.isShown = true;
+
+    console.log("logged in");
   }
 
   register() {
@@ -41,6 +49,25 @@ export class AppComponent {
 
     this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password});
 
+    console.log("registered");
+  }
+
+  save() {
+    if (this.date === '') {
+      return;
+    }
+
+    if (this.time === '') {
+      return;
+    }
+
+    if (this.venue == '') {
+      return;
+    }
+
+    this.http.post<{token: string}>(apiUrl + '/save', {date: this.date, time: this.time, venue: this.venue});
+
+    console.log("saved");
   }
 }
 

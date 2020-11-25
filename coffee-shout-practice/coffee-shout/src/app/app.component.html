@@ -6,3 +6,14 @@
     <input id="button" (click)="login()" type="submit" value="Login">
     <input id="button" (click)="register()" type="submit" value="Register">
 </div>
+
+<div *ngIf="isShown">
+    <header id="h">Who's Shout Next?</header>
+    <input id="input2" [(ngModel)]="date" type="date">
+    <input id="input2" [(ngModel)]="time" type="time">
+    <input id="input3" [(ngModel)]="venue" type="text" placeholder="Venue">
+    <div id="button-component">
+        <input id="button1" (click)="save()" type="submit" value="save">
+    </div> 
+</div>
+

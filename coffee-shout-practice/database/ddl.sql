@@ -8,7 +8,8 @@ create table [user] (
 );
 
 create table coffeeDate (
-    [dateTime]  DATETIME2,
+    [date]      DATE,
+    [time]      TIME,
     venue       NVARCHAR(50),
-    primary key ([dateTime], venue)
+    primary key ([date], [Time], venue)
 );
