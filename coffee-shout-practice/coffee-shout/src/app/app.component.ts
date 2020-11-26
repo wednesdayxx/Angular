@@ -28,7 +28,7 @@ export class AppComponent {
       return;
     }
 
-    this.http.post<{token: string}>(apiUrl + '/login', {username: this.username, password: this.password})
+    this.http.post<{token: string}>(apiUrl + '/login', {username: this.username, password: this.password, observe: 'response'})
       .subscribe((body)=> {
         this.token = body.token;
       })
@@ -47,7 +47,7 @@ export class AppComponent {
       return;
     }
 
-    this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password});
+    this.http.post<{token: string}>(apiUrl + '/register', {username: this.username, password: this.password, observe: 'response'});
 
     console.log("registered");
   }

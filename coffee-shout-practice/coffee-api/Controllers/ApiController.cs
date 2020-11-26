@@ -38,7 +38,7 @@ namespace coffee_shout_practice.Controllers
         {
             using(var connection = new SqlConnection(connectionString))
             {
-                var command = new SqlCommand($"select [password] from [user] where username = {loginDetails.username}", connection);
+                var command = new SqlCommand($"select [password] from [user] where username = '{loginDetails.username}'", connection);
                 connection.Open();
 
                 using(var reader = command.ExecuteReader())
@@ -79,7 +79,7 @@ namespace coffee_shout_practice.Controllers
         {
             using(var connection = new SqlConnection(connectionString))
             {
-                var command = new SqlCommand($"insert into [user] (username, [password]) values({loginDetails.username}, {loginDetails.password})", connection);
+                var command = new SqlCommand($"insert into [user] (username, [password]) values('{loginDetails.username}', '{loginDetails.password}')", connection);
                 connection.Open();
 
                 command.ExecuteNonQuery();
@@ -93,7 +93,7 @@ namespace coffee_shout_practice.Controllers
         {
             using(var connection = new SqlConnection(connectionString))
             {
-                var command = new SqlCommand($"insert into [coffeeDate] ([date], [time], venue) values({savedDetails.date}, {savedDetails.time}, {savedDetails.venue})", connection);
+                var command = new SqlCommand($"insert into [coffeeDate] ([date], [time], venue) values('{savedDetails.date}', '{savedDetails.time}', '{savedDetails.venue}')", connection);
                 connection.Open();
 
                 command.ExecuteNonQuery();
