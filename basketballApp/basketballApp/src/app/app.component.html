@@ -1,0 +1,21 @@
+<input type="email" placeholder="Email" [(ngModel)]="email">
+<input type="password" placeholder="Password" [(ngModel)]="password">
+<input type="button" value="register" (click)="registerWithEmailAndPassword()">
+<input type="button" value="login with email" (click)="loginWithEmailAndPassword()">
+<input type="button" value="login with google" (click)="loginWithGoogle()">
+<input type="button" value="logout" (click)="logout()">
+
+<input type="text" placeholder="Add Venue" [(ngModel)]="venue">
+<input type="button" value="Venue" (click)="createGame()">
+
+<div>
+  <div *ngFor="let game of games | async">
+    <span>
+      {{ game.data.venue }}
+    </span>
+    <input type="text" placeholder="Enter Payment" [(ngModel)]="payment">
+    <input type="text" placeholder="Enter Name" [(ngModel)]="payer">
+    <input type="button" value="Confirm Payment" (click)="payForGame(game.id)">
+    <input type="button" value="X" (click)="deleteGame(game.id)">
+  </div>
+</div>
