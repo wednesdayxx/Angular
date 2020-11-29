@@ -34,7 +34,7 @@ export class AppComponent {
 
   games;
 
-  constructor(private auth: AngularFireAuth, private firestore: AngularFirestore ) { 
+  constructor(public auth: AngularFireAuth, private firestore: AngularFirestore) { 
     this.games = snapshotToData(firestore.collection("games", ref => ref.where("payment", "==", 0)).snapshotChanges());
   }
 
