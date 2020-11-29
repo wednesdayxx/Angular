@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -25,6 +26,8 @@ export class AppComponent {
   password: string = "";
 
   venue: string = "";
+  date: string;
+  time: string;
   
   payment: number;
   payer: string = "";
@@ -32,8 +35,7 @@ export class AppComponent {
   games;
 
   constructor(private auth: AngularFireAuth, private firestore: AngularFirestore ) { 
-    this.games = snapshotToData(firestore.collection("games").snapshotChanges());
-    //this.games = firestore.collection("games").valueChanges();
+    this.games = snapshotToData(firestore.collection("games", ref => ref.where("payment", "==", 0)).snapshotChanges());
   }
 
   async registerWithEmailAndPassword() {
@@ -68,6 +70,8 @@ export class AppComponent {
     this.firestore.collection("games").add({
       venue: this.venue,
       payment: 0,
+      date: this.date,
+      time: this.time,
     })
   }
 
