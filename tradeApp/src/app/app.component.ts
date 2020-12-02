@@ -19,21 +19,23 @@ function snapshotToData(snapshotObservable: Observable<any>) {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   email: string = "";
   password: string = "";
 
-  venue: string = "";
+  location: string = "";
   date: string;
   time: string;
-  
-  payment: number;
-  payer: string = "";
+  customer: string = "";
+  jobtype: string = "";
+  quote: number;
 
-  games;
+  tradesmen: string = "";
+  payment: string = "";
+
+  jobs;
 
   constructor(public auth: AngularFireAuth, private firestore: AngularFirestore) { 
-    this.games = snapshotToData(firestore.collection("games", ref => ref.where("payment", "==", 0)).snapshotChanges());
+    this.jobs = snapshotToData(firestore.collection("jobs", ref => ref.where("payment", "==", 0)).snapshotChanges());
   }
 
   async registerWithEmailAndPassword() {
@@ -51,8 +53,8 @@ export class AppComponent {
   }
 
   async createUser(uid, email) {
-    if (!(await this.firestore.collection("users").doc(uid).get().toPromise()).data()) {
-      this.firestore.collection("users").doc(uid).set({
+    if (!(await this.firestore.collection("employee").doc(uid).get().toPromise()).data()) {
+      this.firestore.collection("employee").doc(uid).set({
         email: email,
         total: 0,
         state: 'pending',
@@ -64,24 +66,26 @@ export class AppComponent {
     this.auth.signOut();
   }
 
-  createGame() {
-    this.firestore.collection("games").add({
-      venue: this.venue,
+  createJob() {
+    this.firestore.collection("jobs").add({
+      location: this.location,
       payment: 0,
       date: this.date,
       time: this.time,
+      jobtype: this.jobtype,
+      customer: this.customer,
+      quote: this.quote,
     })
   }
 
-  deleteGame(id) {
-    this.firestore.collection("games").doc(id).delete();
+  deleteJob(id) {
+    this.firestore.collection("jobs").doc(id).delete();
   }
 
-  payForGame(id) {
-    this.firestore.collection("games").doc(id).update({
+  payForJob(id) {
+    this.firestore.collection("jobs").doc(id).update({
       payment: this.payment,
-      payer: this.payer,
+      tradesmen: this.tradesmen,
     })
   }
-
 }

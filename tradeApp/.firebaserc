@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tradesmanapp-9cf85": {
+      "hosting": {
+        "tradeApp": [
+          "tradesmanapp-9cf85"
+        ]
+      }
+    }
+  }
+}

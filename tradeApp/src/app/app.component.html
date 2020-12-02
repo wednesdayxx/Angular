@@ -1,0 +1,33 @@
+<input type="email" placeholder="Email" [(ngModel)]="email">
+<input type="password" placeholder="Password" [(ngModel)]="password">
+<input type="button" value="register" (click)="registerWithEmailAndPassword()">
+<input type="button" value="login" (click)="loginWithEmailAndPassword()">
+<input type="button" value="login with google" (click)="loginWithGoogle()">
+<input type="button" value="logout" (click)="logout()">
+
+<ng-template [ngIf]="!!(auth.authState | async)">
+
+  <div>
+  <input type="text" placeholder="Enter Customer Name" [(ngModel)]="customer">
+  <input type="text" placeholder="Add Location" [(ngModel)]="location">
+  <input type="date" [(ngModel)]="date">
+  <input type="time" [(ngModel)]="time">
+  <input type="text" placeholder="Enter Job Type" [(ngModel)]="jobtype">
+  <input type="text" placeholder="Enter Quote" [(ngModel)]="quote">
+  <input type="button" value="Add Job" (click)="createJob()">
+  </div>
+
+  <div>
+    <input type="text" placeholder="Enter Payment" [(ngModel)]="payment">
+    <input type="text" placeholder="Enter Tradesman" [(ngModel)]="tradesmen">
+    <div *ngFor="let job of jobs | async">
+      <span>
+        {{ job.data.customer }}, {{ job.data.location }}, {{ job.data.date }}, 
+        {{ job.data.time }}, {{ job.data.jobtype }}, {{ job.data.quote }}
+      </span>
+      <input type="button" value="Confirm Payment" (click)="payForJob(job.id)">
+      <input type="button" value="X" (click)="deleteJob(job.id)">
+    </div>
+  </div>
+
+</ng-template>
